@@ -111,7 +111,8 @@ const CourseDetail = () => {
 
     } catch (err) {
       console.error(err);
-      addToast("Error initiating payment", "error");
+      const errorMessage = err.response?.data?.message || "Error initiating payment";
+      addToast(errorMessage, "error");
     } finally {
       setEnrollingBatch(null);
     }
