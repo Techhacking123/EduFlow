@@ -53,7 +53,12 @@ const Register = () => {
         setError(response.message || 'Registration failed');
       }
     } catch (err) {
-      setError(err.response?.data?.message || 'An error occurred. Please try again.');
+      // If it's a network error (CORS blocked the response), we can't tell if data was saved
+      if (!err.response || err.message === 'Network Error') {
+        navigate('/login', { state: { registrationNote: true } });
+      } else {
+        setError(err.response?.data?.message || 'An error occurred. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
