@@ -123,10 +123,11 @@ const Register = () => {
               {/* Role Selection */}
               <div className="space-y-3">
                 <label className="block text-sm font-semibold text-slate-700 ml-1">I am a...</label>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-3 gap-2 sm:gap-3">
                   {[
                     { id: 'student', label: 'Student', icon: '🎓' },
                     { id: 'faculty', label: 'Faculty', icon: '👨‍🏫' },
+                    { id: 'parent', label: 'Parent', icon: '👪' },
                   ].map((r) => (
                     <div
                       key={r.id}
