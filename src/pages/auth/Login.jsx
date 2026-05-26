@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../../store/authSlice';
 import { login as loginApi } from '../../api/auth.api';
@@ -13,6 +13,8 @@ const Login = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+  const registrationNote = location.state?.registrationNote;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -71,6 +73,13 @@ const Login = () => {
                 Enter your details to access your dashboard.
               </p>
             </div>
+
+            {registrationNote && (
+              <div className="bg-amber-50 border-l-4 border-amber-400 text-amber-800 p-4 rounded-r-xl mb-6 animate-slide-up flex items-start gap-3">
+                <svg className="w-5 h-5 text-amber-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <p className="font-medium text-sm">Your account may have been created. Try logging in with your credentials. If it doesn't work, <Link to="/register" className="underline font-bold">register again</Link>.</p>
+              </div>
+            )}
 
             {error && (
               <div className="bg-rose-50 border-l-4 border-rose-500 text-rose-700 p-4 rounded-r-xl mb-6 animate-slide-up flex items-start gap-3">
